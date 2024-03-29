@@ -1,0 +1,17 @@
+root@90e5800e0a2e:~/host# make mgba
+[CLEAN] Removing all compiled files
+rm -f *.o *.elf *.gba *.log */*.o *.sav */*/*.sav client
+arm-none-eabi-gcc -Wall -Werror -std=c99 -pedantic -Wextra -fno-common -mthumb-interwork -mthumb -mlong-calls -I /usr/arm-none-eabi/include -Wstrict-prototypes -Wold-style-definition -Werror=vla -g -DDEBUG -I../shared   -c -o font.o font.c
+arm-none-eabi-gcc -Wall -Werror -std=c99 -pedantic -Wextra -fno-common -mthumb-interwork -mthumb -mlong-calls -I /usr/arm-none-eabi/include -Wstrict-prototypes -Wold-style-definition -Werror=vla -g -DDEBUG -I../shared   -c -o gba.o gba.c
+arm-none-eabi-gcc -Wall -Werror -std=c99 -pedantic -Wextra -fno-common -mthumb-interwork -mthumb -mlong-calls -I /usr/arm-none-eabi/include -Wstrict-prototypes -Wold-style-definition -Werror=vla -g -DDEBUG -I../shared   -c -o header.o header.c
+arm-none-eabi-gcc -Wall -Werror -std=c99 -pedantic -Wextra -fno-common -mthumb-interwork -mthumb -mlong-calls -I /usr/arm-none-eabi/include -Wstrict-prototypes -Wold-style-definition -Werror=vla -g -DDEBUG -I../shared   -c -o images/garbage.o images/garbage.c
+arm-none-eabi-gcc -Wall -Werror -std=c99 -pedantic -Wextra -fno-common -mthumb-interwork -mthumb -mlong-calls -I /usr/arm-none-eabi/include -Wstrict-prototypes -Wold-style-definition -Werror=vla -g -DDEBUG -I../shared   -c -o main.o main.c
+arm-none-eabi-gcc -nostartfiles -lc -lgcc -L /usr/arm-none-eabi/lib -L /usr/arm-none-eabi/lib/thumb -L /usr/lib/gcc/arm-none-eabi/10.3.1 -T /opt/cs2110-tools/arm-gba.ld --specs=nosys.specs -g  main.o   -o main
+/usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/bin/ld: warning: cannot find entry symbol _start; defaulting to 0000000008000000
+/usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/bin/ld: main.o: in function `main':
+/cs2110/host/main.c:32: undefined reference to `myVar'
+/usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/bin/ld: /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/libnosys.a(sbrk.o): in function `_sbrk':
+/build/newlib-pB30de/newlib-3.3.0/build/arm-none-eabi/libgloss/libnosys/../../../../libgloss/libnosys/sbrk.c:21: undefined reference to `end'
+collect2: error: ld returned 1 exit status
+make: *** [<builtin>: main] Error 1
+root@90e5800e0a2e:~/host# 
